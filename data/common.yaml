@@ -1,0 +1,10 @@
+---
+
+snowagent::snowagent_endpoint: 'https://uni-sam-gw1.campus.unibe.ch'
+snowagent::snowagent_sitename: 'unibe-zb-id'
+snowagent::snowagent_baseurl:  'https://tools.id.unibe.ch/snowagent/'
+snowagent::snowagent_version:  '6.3.1-1'
+snowagent::snowagent_loglevel: 'warning'
+snowagent::snowagent_excludes:
+  - '/home/*'
+  - '/var/*'

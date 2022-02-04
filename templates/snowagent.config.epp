@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="snowclient_settings.xsd">
+	<Agent>
+    <SiteName><%= scope['snowagent::snowagent_sitename'] %></SiteName>
+    <ConfigName>Lin_UniBE_v1_MeterOn</ConfigName>
+  </Agent>
+  <Server>
+    <Endpoint>
+      <Address><%= scope['snowagent::snowagent_endpoint'] %></Address>
+      <!--<ClientCertificate>
+				<FileName>.pfx</FileName>
+				<Password></Password>
+			</ClientCertificate>-->
+    </Endpoint>
+  </Server>
+
+	<!-- Delivery location for scan results -->
+	<DropLocation>
+		<Path></Path>
+	</DropLocation>
+
+	<!-- Configuration for File System scan-->
+	<Software>
+		<Include>
+			<Path recursive="true" unconditionally="false">/*</Path>
+		</Include>
+		<IncludeCriteria enabled="true">
+			<FileType>ELF*executable*</FileType>
+			<FileType>otf</FileType>
+		</IncludeCriteria>
+		<Exclude>
+			<Path>/tmp*</Path>
+      <% scope['snowagent::snowagent_excludes'].each |$path| { -%>
+      <Path><%= $path %></Path>
+      <% } -%>
+		</Exclude>
+	</Software>
+
+	<!-- Scanning for Oracle databases, requires SIOS  -->
+	<Oracle enabled="false">
+		<!-- If no user credential for specific Instance is given this is used on all other Intances. -->
+		<!-- <DefaultInstanceCredentials>
+			<UserName></UserName>
+			<Password></Password>
+		</DefaultInstanceCredentials> -->
+		<Include>
+			<!-- Either AllInstances or one or more <Instance> -->
+			<AllInstances>true</AllInstances>
+		</Include>
+	</Oracle>
+
+	<Logging>
+		<MaxSize>10240</MaxSize>
+		<!-- error, warning, info, trace, verbose -->
+		<Level><%= scope['snowagent::snowagent_loglevel'] %></Level>
+	</Logging>
+
+	<SystemSettings>
+		<!-- Running processes -->
+		<Setting key="software.scan.running_processes" value="true"/>
+
+		<!-- Scan jar files metadata -->
+		<Setting key="software.scan.jar" value="true" />
+
+		<!-- Scan package manager for software inventoring on Debian, SUSE, Ubuntu -->
+		<Setting key="software.scan.dpkg" value="true" />
+
+		<!-- Scan package manager for software inventoring on RedHat and CentOS-->
+		<Setting key="software.scan.rpm" value="true" />
+
+		<!-- Check for server certificate -->
+		<Setting key="http.ssl_verify" value="false"/>
+
+		<!-- Append the log files -->
+		<Setting key="log.append" value="false"/>
+
+		<!-- Storage folder for snowpacks -->
+		<Setting key="env.data_dir" value="data/"/>
+
+		<!-- Logging folder for snowagent.log -->
+		<Setting key="env.log_dir" value="data/"/>
+
+		<!-- Java executable to run SIOS.jar, configure if java.exe is not in the PATH -->
+		<!-- <Setting key="env.java_home" value="java/bin/java"/> -->
+	</SystemSettings>
+</Configuration>
