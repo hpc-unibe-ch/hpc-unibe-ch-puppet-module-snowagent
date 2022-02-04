@@ -1,7 +1,7 @@
 # @api private
 class snowagent::config {
   file { '/opt/snow/snowagent.config':
-    ensure  => file,
+    ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
