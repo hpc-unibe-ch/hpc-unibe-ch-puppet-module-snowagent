@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="snowclient_settings.xsd">
 	<Agent>
-    <SiteName><%= scope['snowagent::snowagent_sitename'] %></SiteName>
+    <SiteName><%= $snowagent::snowagent_sitename %></SiteName>
     <ConfigName>Lin_UniBE_v1_MeterOn</ConfigName>
   </Agent>
   <Server>
     <Endpoint>
-      <Address><%= scope['snowagent::snowagent_endpoint'] %></Address>
+      <Address><%= $snowagent::snowagent_endpoint %></Address>
       <!--<ClientCertificate>
 				<FileName>.pfx</FileName>
 				<Password></Password>
@@ -30,7 +30,7 @@
 		</IncludeCriteria>
 		<Exclude>
 			<Path>/tmp*</Path>
-      <% scope['snowagent::snowagent_excludes'].each |$path| { -%>
+      <% $snowagent::snowagent_excludes.each |$path| { -%>
       <Path><%= $path %></Path>
       <% } -%>
 		</Exclude>
@@ -52,7 +52,7 @@
 	<Logging>
 		<MaxSize>10240</MaxSize>
 		<!-- error, warning, info, trace, verbose -->
-		<Level><%= scope['snowagent::snowagent_loglevel'] %></Level>
+		<Level><%= $snowagent::snowagent_loglevel %></Level>
 	</Logging>
 
 	<SystemSettings>
