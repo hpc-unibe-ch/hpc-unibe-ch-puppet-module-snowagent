@@ -23,4 +23,6 @@ class snowagent (
 
   contain snowagent::install
   contain snowagent::config
+
+  Class['snowagent::install'] -> Class['snowagent::config']
 }
