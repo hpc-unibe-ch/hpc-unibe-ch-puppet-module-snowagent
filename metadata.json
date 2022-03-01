@@ -2,9 +2,9 @@
   "name": "unibehpc-snowagent",
   "version": "0.1.0",
   "author": "unibehpc",
-  "summary": "",
+  "summary": "This module installs the snowagent daemon",
   "license": "Apache-2.0",
-  "source": "",
+  "source": "https://github.com/hpc-unibe-ch/puppet-module-snowagent",
   "dependencies": [
     {
       "name": "puppet-cron",
@@ -43,7 +43,7 @@
       "version_requirement": ">= 6.21.0 < 8.0.0"
     }
   ],
-  "pdk-version": "2.3.0",
+  "pdk-version": "2.4.0",
   "template-url": "pdk-default#2.3.0",
   "template-ref": "tags/2.3.0-0-g8aaceff"
 }
