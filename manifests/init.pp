@@ -12,6 +12,7 @@ class snowagent (
   Optional[String] $snowagent_baseurl,
   Optional[String] $snowagent_version,
   Optional[Array[String]] $snowagent_excludes,
+  Boolean $snowagent_add_kill_cron,
 ) {
   $osfamily = fact('os.family')
   $osmajor = fact('os.release.major')
@@ -23,6 +24,10 @@ class snowagent (
 
   contain snowagent::install
   contain snowagent::config
+
+  if $snowagent_add_kill_cron {
+    contain snowagent::kill_cron
+  }
 
   Class['snowagent::install'] -> Class['snowagent::config']
 }
